@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Am I? - An Esoteric Journey</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* Use Inter as the default sans-serif font */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Ensure black background */
+        }
+        /* Use Merriweather for a more "book-like" serif font */
+        .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+        /* Simple glowing effect for the keywords (Only for "Discover Insight" button now) */
+        .glow-effect {
+            box-shadow: 0 0 8px rgba(253, 224, 71, 0.3), 0 0 12px rgba(253, 224, 71, 0.2);
+        }
+
+        /* This CSS creates a responsive 16:9 aspect ratio box */
+        /* NOTE: We are not using 16:9 for the new <video> tag, but keeping the class in case */
+        .video-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Style for the clickable navigation keywords */
+        .nav-button {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            /* Add back a subtle hover glow for dull buttons */
+            box-shadow: 0 0 12px rgba(253, 224, 71, 0.5), 0 0 20px rgba(253, 224, 71, 0.3);
+        }
+
+        /* Animation for the 'Connect' button */
+        @keyframes breathing-glow {
+          0% {
+            box-shadow: 0 0 8px rgba(253, 224, 71, 0.3), 0 0 12px rgba(253, 224, 71, 0.2);
+            transform: scale(1);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(253, 224, 71, 0.7), 0 0 30px rgba(253, 224, 71, 0.5);
+            transform: scale(1.03);
+          }
+          100% {
+            box-shadow: 0 0 8px rgba(253, 224, 71, 0.3), 0 0 12px rgba(253, 224, 71, 0.2);
+            transform: scale(1);
+          }
+        }
+        .breathing-button {
+            /* Inherits from nav-button but overrides glow-effect with animation */
+            animation: breathing-glow 2.5s infinite ease-in-out;
+        }
+        /* Hover for breathing button should be static */
+        .breathing-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(253, 224, 71, 0.5), 0 0 20px rgba(253, 224, 71, 0.3);
+        }
+
+
+        /* Styling for disabled navigation buttons */
+        .disabled-button {
+          opacity: 0.4;
+          cursor: not-allowed;
+          background-color: #374151; /* gray-700 */
+          border: 1px solid #4b5563; /* gray-600 */
+          color: #9ca3af; /* gray-400 */
+          box-shadow: none;
+        }
+        .disabled-button:hover {
+          transform: none;
+          box-shadow: none;
+        }
+
+
+        /* Styling for the new page sections */
+        .page-section {
+            display: none; /* Hidden by default */
+            min-height: 100vh;
+        }
+
+        /* Styling for the 'cool' return button */
+        .return-button {
+            position: fixed; /* 'cool but not in the way' */
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(253, 224, 71, 0.3);
+            color: rgba(253, 224, 71, 0.7);
+            border-radius: 9999px; /* full pill shape */
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+        }
+        .return-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: rgba(253, 224, 71, 1);
+            border-color: rgba(253, 224, 71, 0.7);
+        }
+
+        /* Form input styling */
+        .form-input {
+            background-color: #1a1a1a;
+            border: 1px solid #4a4a4a;
+            color: #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #fde047; /* yellow-400 */
+            box-shadow: 0 0 0 2px rgba(253, 224, 71, 0.3);
+        }
+        .form-label {
+            color: #a0a0a0;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Globe button (renamed, but class kept for styles) */
+        .globe-button {
+            /* font-size and line-height removed, no longer needed for img */
+            padding: 0.75rem; /* Adjust padding as needed */
+            width: 4rem; /* Example fixed size */
+            height: 4rem; /* Example fixed size */
+            border-radius: 9999px;
+            background-color: #fde047;
+            color: #000;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            /* Added to center the img */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Hide parts of image if needed */
+        }
+        .globe-button img {
+            width: 2.5rem; /* Adjust image size */
+            height: 2.5rem; /* Adjust image size */
+            object-fit: contain; /* Ensure image fits well */
+        }
+        .globe-button:hover {
+            transform: scale(1.1); /* Simplified hover effect */
+            box-shadow: 0 0 20px rgba(253, 224, 71, 0.5);
+        }
+        .globe-button:disabled {
+            opacity: 0.5;
+            cursor: wait;
+        }
+
+        /* Insight Button */
+        #getInsightButton:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #a16207; /* dark yellow */
+        }
+        /* Insight response text */
+        #insightText {
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        /* Styling for the explanation text on Connect page */
+        .explanation-text {
+            color: #a0a0a0; /* text-gray-400 */
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            border-left: 2px solid #fde047; /* yellow-400 */
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* * =================================================================
+         * == NEW AMA (PROFESSIONAL/GOLD) STYLES ==
+         * =================================================================
+         */
+
+        /* For the "AMA" pre-header */
+        .ama-pre-header {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: #fde047; /* yellow-400 */
+            text-transform: uppercase;
+        }
+
+        /* For the main "Ask Morpheus Alliance" header */
+        .morpheus-header {
+            font-family: 'Merriweather', serif;
+            font-size: 3.5rem; /* 56px */
+            line-height: 1.2;
+            font-weight: 700;
+            color: #ffffff; /* White */
+            text-shadow: 0 0 15px rgba(253, 224, 71, 0.4), /* Gold glow */
+                         0 0 25px rgba(253, 224, 71, 0.2);
+        }
+
+        /* New AMA button style */
+        .ama-button {
+            background-color: #fde047; /* yellow-400 */
+            color: #000; /* Black text */
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            box-shadow: 0 0 15px rgba(253, 224, 71, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .ama-button:hover {
+            transform: scale(1.05);
+            background-color: #fef08a; /* yellow-200 */
+            box-shadow: 0 0 25px rgba(253, 224, 71, 0.7);
+        }
+        .ama-button:disabled {
+            opacity: 0.5;
+            cursor: wait;
+            box-shadow: none;
+        }
+
+        /* AMA Input Field */
+        .ama-input {
+            background-color: #1a1a1a;
+            border: 1px solid #4a4a4a;
+            color: #e0e0e0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+        .ama-input::placeholder {
+            color: #a0a0a0;
+            opacity: 0.5;
+        }
+        .ama-input:focus {
+            outline: none;
+            border-color: #fde047;
+            box-shadow: 0 0 0 2px rgba(253, 224, 71, 0.3);
+        }
+
+        /* AMA Response Area */
+        .ama-response {
+            min-height: 4rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(17, 17, 17, 0.5);
+            border-left: 3px solid #fde047; /* yellow-400 border */
+            color: #e0e0e0;
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            line-height: 1.7;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+        }
+        
+        /* New style for PDF links on Discover page (NO LONGER USED) */
+        .pdf-link-button {
+            display: block;
+            background-color: #1a1a1a;
+            border: 1px solid #fde047; /* yellow-400 */
+            color: #fde047;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .pdf-link-button:hover {
+            background-color: #2a2a2a;
+            color: #fef08a; /* yellow-200 */
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
+        }
+        .pdf-link-button strong {
+            color: #ffffff;
+            font-weight: 600;
+            display: block;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Style for the Reading Area on Align page */
+        .reading-area {
+            background-color: rgba(17, 17, 17, 0.7); /* Slightly transparent dark */
+            border-left: 3px solid #fde047; /* Gold border like AMA response */
+            padding: 1.5rem;
+            margin-top: 2rem;
+            color: #e0e0e0;
+            font-family: 'Merriweather', serif;
+            line-height: 1.7;
+            border-radius: 0 0.5rem 0.5rem 0; /* Rounded corners on right */
+        }
+        .reading-area h3 {
+            color: #fde047; /* Gold heading */
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Styles for Payment Section */
+        .payment-options {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05); /* Slightly lighter background */
+            border-left: 3px solid #fde047;
+            border-radius: 0 0.5rem 0.5rem 0;
+            color: #e0e0e0;
+        }
+        .payment-options h3 {
+            color: #fde047;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .payment-options ul {
+            list-style: none;
+            padding: 0;
+        }
+        .payment-options li {
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .payment-options strong {
+            color: #ffffff; /* White emphasis */
+            margin-right: 0.5rem;
+        }
+
+        /* Simple shake animation for form validation */
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          50% { transform: translateX(5px); }
+          75% { transform: translateX(-5px); }
+        }
+        .animate-shake {
+          animation: shake 0.3s ease-in-out;
+        }
+
+
+    </style>
+</head>
+<body class="bg-black text-gray-200">
+
+    <!-- 
+      ==================================================================
+      == PAGE 1: HOME (THE AD) ==
+      ==================================================================
+    -->
+    <div id="page-home" class="page-section" style="display: block;">
+        <!-- justify-around removed, justify-start and pt-16 added -->
+        <div class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8 pt-16 pb-12">
+            
+            <!-- 
+              ==================================================================
+              == NEW AMA (ASK MORPHEUS ALLIANCE) FEATURE ==
+              == REDESIGNED & TIGHTENED SPACING ==
+              ==================================================================
+            -->
+            <!-- mb-12 (3rem) changed to mb-8 (2rem) -->
+            <div class="w-full max-w-4xl mx-auto text-center mb-8">
+                <h2 class="ama-pre-header mb-2">AMA</h2>
+                <h1 class="morpheus-header mb-6">Ask Morpheus Alliance</h1>
+                <div class="w-full max-w-2xl mx-auto">
+                    <input type="text" id="amaInput" class="ama-input" placeholder="Ask your question...">
+                    <button id="amaButton" class="ama-button mt-4">Submit Query</button>
+                    <div id="amaResponse" class="ama-response text-left">
+                        <!-- Morpheus's answer will appear here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 
+              ==================================================================
+              == 1. Video Player Section - ROBUST <video> TAG SOLUTION ==
+              ==================================================================
+            -->
+            <div class="w-full max-w-4xl mx-auto shadow-2xl rounded-lg overflow-hidden border border-yellow-500/30 bg-gray-900">
+                <!-- 
+                  This is YOUR video, linked from GitHub.
+                  The attributes 'autoplay', 'muted', 'loop', and 'playsinline'
+                  ensure it plays as a background video.
+                  
+                  *** 'controls' added to allow user to unmute. ***
+                -->
+                <video 
+                    src="https://raw.githubusercontent.com/amalliance27-bit/soundbars-media/main/AMA%20COMING%20NOW.mp4" 
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    controls 
+                    class="w-full h-full object-cover"
+                    title="AMA Coming Now Ad">
+                </video> 
+            </div>
+
+
+            <!-- 2. Ad Message Section -->
+            <div class="max-w-3xl mx-auto text-center mt-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Who Am I?</h1>
+                <p class="text-lg md:text-xl text-gray-400 italic mb-8">An esoteric fantasy journey.</p>
+                <blockquote class="text-2xl md:text-3xl font-serif text-yellow-300/90 leading-relaxed border-l-4 border-yellow-500/70 pl-6 py-4 my-10">
+                    "The cosmic potential does not ask who you are. It asks what are you willing to become."
+                </blockquote>
+                <p class="text-xl md:text-2xl text-white font-light mt-8 mb-10">
+                    Seeker of the Light.
+                </p>
+
+                <!-- 
+                  ==================================================================
+                  == NAVIGATION BUTTONS (HOME) ==
+                  == Only 'Connect' is active and glowing ==
+                  ==================================================================
+                -->
+                <div class="flex flex-wrap justify-center gap-4 text-lg">
+                    <!-- The only active button, with a new breathing glow effect -->
+                    <button class="nav-button breathing-button bg-gray-800 border border-yellow-500/50 text-yellow-300 py-2 px-5 rounded-full shadow-lg" onclick="showPage('page-connect')">Connect</button>
+                    
+                    <!-- Disabled buttons -->
+                    <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Align</button>
+                    <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Discover</button>
+                    <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Transform</button>
+                    <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Release</button> 
+                </div>
+
+
+                <p class="text-xl md:text-2xl text-white font-light mt-12">
+                    Your Potential Your Destiny.
+                </p>
+
+                <!-- 
+                  ==================================================================
+                  == GEMINI FEATURE ==
+                  ==================================================================
+                -->
+                <div class="mt-16 w-full">
+                    <!-- 1. The Button -->
+                    <button id="getInsightButton" class="bg-yellow-500 text-black font-bold py-3 px-8 rounded-full shadow-lg glow-effect text-lg transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75">
+                        ✨ Discover Your Insight ✨
+                    </button>
+
+                    <!-- 2. The Response Area -->
+                    <div id="insightResponseArea" class="mt-8 min-h-[6rem] flex items-center justify-center">
+                        <blockquote id="insightText" class="text-xl md:text-2xl font-serif text-gray-400 italic leading-relaxed px-4 py-2">
+                            <!-- Content will appear here -->
+                        </blockquote>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 
+              ==================================================================
+              == NEW FOOTER (ALL 6 PAGES) ==
+              ==================================================================
+            -->
+            <footer class="w-full text-center text-xs mt-16 py-8 border-t border-gray-800">
+                <span class="text-gray-500">AMA - Ask Morpheus Alliance @All rights reserved</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- 
+      ==================================================================
+      == PAGE 2: CONNECT (ELYSIUM REGISTRATION) ==
+      ==================================================================
+    -->
+    <div id="page-connect" class="page-section">
+        <!-- FIX: Removed "to Sanctuary" -->
+        <button class="return-button" onclick="showPage('page-home')">&larr; Return</button>
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-4 font-serif">Elysium : Lantern 0</h1>
+            <p class="text-lg md:text-xl text-gray-400 italic max-w-2xl mb-12">
+                A virtual sanctuary for the curious seekers asking questions to align with the right answers.
+            </p>
+
+            <div class="w-full max-w-lg text-left">
+                <h2 class="text-2xl text-white mb-6 text-center">Moniker: Your Cornerstone Key</h2>
+                <p class="explanation-text max-w-lg mx-auto">
+                    Your Moniker is the Cornerstone Letter of your identity—your aptitude for projects, work, and relationships. It is derived from your <strong>Mantra (First Name)</strong>.
+                    <br><br>
+                    Your <strong>Genesis (Date of Birth)</strong> reveals your <strong>Genesis Triangle</strong> and <strong>Life Path Number</strong> through numerology. This is the expected experience of your soul's journey, the light within you. We reduce your MM, DD, and YYYY to single digits to form your triangle.
+                    <br><br>
+                    The sum of this triangle reveals your Life Path. Master Numbers (11, 22, 33) are noted as special.
+                </p>
+            </div>
+            
+            <!-- Registration Form -->
+            <form id="connectForm" class="w-full max-w-lg space-y-6 text-left">
+                <div>
+                    <!-- "First Name" field removed -->
+                    <label for="mantra" class="form-label">Enter Your Mantra (First Name)</label>
+                    <input type="text" id="mantra" name="mantra" class="form-input" required>
+                </div>
+                <div>
+                    <label class="form-label">Genesis (MM/DD/YYYY)</label>
+                    <div class="flex gap-4">
+                        <input type="text" id="birth-mm" name="birth-mm" class="form-input text-center" placeholder="MM" maxlength="2" required pattern="\d{1,2}">
+                        <input type="text" id="birth-dd" name="birth-dd" class="form-input text-center" placeholder="DD" maxlength="2" required pattern="\d{1,2}">
+                        <input type="text" id="birth-yyyy" name="birth-yyyy" class="form-input text-center" placeholder="YYYY" maxlength="4" required pattern="\d{4}">
+                    </div>
+                </div>
+                <div>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+                <div>
+                    <label for="bloodType" class="form-label">Blood Type (if applicable)</label>
+                    <select id="bloodType" name="bloodType" class="form-input">
+                        <option value="">Select...</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+
+                <!-- 
+                  ==================================================================
+                  == SUBMIT BUTTON REMOVED (Navigation button handles submit) ==
+                  ==================================================================
+                -->
+                <div class="text-center pt-6">
+                    <!-- Note: The submission is now handled by the Align button below -->
+                    <p id="formMessage" class="text-yellow-400 mt-4 h-6"></p> <!-- Message area for validation -->
+                </div>
+                
+            </form>
+
+            <!-- 
+              ==================================================================
+              == NAVIGATION BUTTONS (CONNECT) ==
+              == Only 'Align' is active and glowing ==
+              ==================================================================
+            -->
+            <div class="flex flex-wrap justify-center gap-4 text-lg mt-16">
+                <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Connect</button> 
+                
+                <!-- Next Step: Align - GLOWING (This button now runs the validation and submission) -->
+                <button id="align-nav-button" class="nav-button breathing-button bg-gray-800 border border-yellow-500/50 text-yellow-300 py-2 px-5 rounded-full shadow-lg" onclick="showPage('page-align')">Align</button>
+                
+                <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Discover</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Transform</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Release</button> 
+            </div>
+
+            <!-- 
+              ==================================================================
+              == NEW FOOTER (ALL 6 PAGES) ==
+              ==================================================================
+            -->
+            <footer class="w-full text-center text-xs mt-16 py-8 border-t border-gray-800">
+                <span class="text-gray-500">AMA - Ask Morpheus Alliance @All rights reserved</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- 
+      ==================================================================
+      == PAGE 3: ALIGN (NOW A RESULTS PAGE) ==
+      ==================================================================
+    -->
+    <div id="page-align" class="page-section">
+        <!-- FIX: Removed "to Sanctuary" -->
+        <button class="return-button" onclick="showPage('page-home')">&larr; Return</button>
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-4 font-serif">Alignment Complete</h1>
+            <p class="text-2xl text-gray-300 italic max-w-2xl mb-12">
+                Welcome, <span id="align-mantra" class="font-bold text-white">Seeker</span>. Your Moniker is revealed.
+            </p>
+
+            <div class="bg-gray-900/50 border border-yellow-500/30 rounded-lg shadow-2xl p-8 max-w-2xl w-full text-left space-y-6">
+                
+                <div>
+                    <span class="text-sm font-bold uppercase text-yellow-400">Genesis Triangle</span>
+                    <p id="align-triangle" class="text-3xl font-serif text-white">-</p>
+                    <p class="text-gray-400">The three pillars of your birth code.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <span class="text-sm font-bold uppercase text-yellow-400">Cornerstone Letter</span>
+                        <p id="align-cornerstone" class="text-5xl font-serif text-white">-</p>
+                        <p class="text-gray-400">Your approach to the world.</p>
+                    </div>
+                    <div>
+                        <span class="text-sm font-bold uppercase text-yellow-400">Life Path</span>
+                        <p id="align-lifepath" class="text-5xl font-serif text-white">-</p>
+                        <p id="align-lifepath-name" class="text-gray-400">Your soul's journey.</p>
+                    </div>
+                </div>
+
+                <!-- 
+                  ==================================================================
+                  == NEW: COSMIC READING SECTION ==
+                  ==================================================================
+                -->
+                <div id="align-reading" class="reading-area">
+                    <h3>Your Cosmic Reading</h3>
+                    <p>Calculating your resonance...</p>
+                </div>
+
+            </div>
+            
+            <p class="text-white mt-12 text-lg">The next phase of your journey awaits.</p>
+
+            <!-- 
+              ==================================================================
+              == NAVIGATION BUTTONS (ALIGN) ==
+              == Only 'Discover' is active and glowing ==
+              ==================================================================
+            -->
+            <div class="flex flex-wrap justify-center gap-4 text-lg mt-16">
+                 <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Connect</button> 
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Align</button>
+                
+                <!-- Next Step: Discover - GLOWING -->
+                <button class="nav-button breathing-button bg-gray-800 border border-yellow-500/50 text-yellow-300 py-2 px-5 rounded-full shadow-lg" onclick="showPage('page-discover')">Discover</button>
+
+                <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Transform</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Release</button> 
+            </div>
+
+            <!-- 
+              ==================================================================
+              == NEW FOOTER (ALL 6 PAGES) ==
+              ==================================================================
+            -->
+            <footer class="w-full text-center text-xs mt-16 py-8 border-t border-gray-800">
+                <span class="text-gray-500">AMA - Ask Morpheus Alliance @All rights reserved</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- 
+      ==================================================================
+      == PAGE 4: DISCOVER (BACK TO PLACEHOLDER) ==
+      ==================================================================
+    -->
+    <div id="page-discover" class="page-section">
+        <!-- FIX: Removed "to Sanctuary" -->
+        <button class="return-button" onclick="showPage('page-home')">&larr; Return</button>
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-4 font-serif">Discover</h1>
+            <p class="text-lg md:text-xl text-gray-400 italic max-w-2xl">
+                Discover the wisdom hidden within your Moniker.
+            </p>
+            <p class="text-white mt-8">Content for this section is coming soon.</p>
+
+            <!-- 
+              ==================================================================
+              == NAVIGATION BUTTONS (DISCOVER) ==
+              == Only 'Transform' is active and glowing ==
+              ==================================================================
+            -->
+            <div class="flex flex-wrap justify-center gap-4 text-lg mt-16">
+                <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Connect</button> 
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Align</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Discover</button>
+                
+                <!-- Next Step: Transform - GLOWING -->
+                <button class="nav-button breathing-button bg-gray-800 border border-yellow-500/50 text-yellow-300 py-2 px-5 rounded-full shadow-lg" onclick="showPage('page-transform')">Transform</button> 
+                
+                <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Release</button> 
+            </div>
+
+            <!-- 
+              ==================================================================
+              == NEW FOOTER (ALL 6 PAGES) ==
+              ==================================================================
+            -->
+            <footer class="w-full text-center text-xs mt-16 py-8 border-t border-gray-800">
+                <span class="text-gray-500">AMA - Ask Morpheus Alliance @All rights reserved</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- 
+      ==================================================================
+      == PAGE 5: TRANSFORM (PLACEHOLDER) ==
+      ==================================================================
+    -->
+    <div id="page-transform" class="page-section">
+        <!-- FIX: Removed "to Sanctuary" -->
+        <button class="return-button" onclick="showPage('page-home')">&larr; Return</button>
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-4 font-serif">Transform</h1>
+            <p class="text-lg md:text-xl text-gray-400 italic max-w-2xl">
+                Embrace the change. Become what you are meant to be.
+            </p>
+            <p class="text-white mt-8">Content for this section is coming soon.</p>
+
+            <!-- 
+              ==================================================================
+              == NAVIGATION BUTTONS (TRANSFORM) ==
+              == Only 'Release' is active and glowing ==
+              ==================================================================
+            -->
+            <div class="flex flex-wrap justify-center gap-4 text-lg mt-16">
+                <!-- Disabled -->
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Connect</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Align</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Discover</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Transform</button>
+                
+                <!-- Next Step: Release - GLOWING -->
+                <button class="nav-button breathing-button bg-gray-800 border border-yellow-500/50 text-yellow-300 py-2 px-5 rounded-full shadow-lg" onclick="showPage('page-release')">Release</button> 
+            </div>
+
+            <!-- 
+              ==================================================================
+              == NEW FOOTER (ALL 6 PAGES) ==
+              ==================================================================
+            -->
+            <footer class="w-full text-center text-xs mt-16 py-8 border-t border-gray-800">
+                <span class="text-gray-500">AMA - Ask Morpheus Alliance @All rights reserved</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- 
+      ==================================================================
+      == PAGE 6: RELEASE (PLACEHOLDER - FINAL STEP / PAYMENT) ==
+      ==================================================================
+    -->
+    <div id="page-release" class="page-section">
+        <!-- FIX: Removed "to Sanctuary" -->
+        <button class="return-button" onclick="showPage('page-home')">&larr; Return</button>
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-300 mb-4 font-serif">Profile Processing</h1>
+            <p class="text-lg md:text-xl text-gray-400 italic max-w-2xl">
+                Complete your alignment by processing your Moniker profile.
+            </p>
+            
+            <!-- 
+              ==================================================================
+              == NEW: PAYMENT OPTIONS PLACEHOLDER (UPDATED) ==
+              ==================================================================
+            -->
+            <div class="payment-options max-w-lg w-full text-left">
+                <h3>Payment Options</h3>
+                <p class="text-gray-400 mb-4">Please select your preferred method for profile processing:</p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg text-white font-semibold mb-2">United States (USD)</h4>
+                    <ul>
+                        <li><strong>PayPal:</strong> AdlineM@gmail.com</li>
+                        <li><strong>Cash App:</strong> $Morpheus53</li>
+                        <li><strong>Zelle:</strong> Deanmartin248@gmail.com</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg text-white font-semibold mb-2">Canada (CAD)</h4>
+                    <ul>
+                        <li><strong>PayPal:</strong> Askmorpheus27@gmail.com</li>
+                        <li><strong>Interac e-Transfer:</strong> AskMorpheus@gmail.com</li>
+                    </ul>
+                </div>
+                <p class="text-gray-500 text-sm mt-6 italic">Note: This section is a placeholder. Actual payment processing is not implemented.</p>
+            </div>
+
+
+            <!-- 
+              ==================================================================
+              == NAVIGATION BUTTONS (RELEASE) ==
+              == All buttons disabled (Final Step) ==
+              ==================================================================
+            -->
+            <div class="flex flex-wrap justify-center gap-4 text-lg mt-16">
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Connect</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Align</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Discover</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Transform</button>
+                <button class="disabled-button py-2 px-5 rounded-full text-lg" disabled>Release</button> 
+            </div>
+
+            <!-- 
+              ==================================================================
+              == NEW FOOTER (ALL 6 PAGES) ==
+              ==================================================================
+            -->
+            <footer class="w-full text-center text-xs mt-16 py-8 border-t border-gray-800">
+                <span class="text-gray-500">AMA - Ask Morpheus Alliance @All rights reserved</span>
+            </footer>
+
+        </div>
+    </div>
+
+
+    <!-- 
+      ==================================================================
+      == SCRIPTING (Page Navigation, Firebase & Gemini API) ==
+      ==================================================================
+    -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // === GLOBAL VARIABLES - FIREBASE ===
+        let db, auth, userId, appId;
+        const form = document.getElementById('connectForm');
+        const formMessage = document.getElementById('formMessage');
+        // Submit button is commented out in HTML, set var to null
+        const submitButton = null; 
+
+        // === GLOBAL VARIABLES - GEMINI (INSIGHT) ===
+        let insightCount = 0;
+        const insightLimit = 3;
+        const insightButton = document.getElementById('getInsightButton');
+        const insightText = document.getElementById('insightText');
+        const apiKey = ""; // API key is handled by the environment
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        const insightSystemPrompt = "You are a Cosmic Oracle, a keeper of esoteric wisdom. You speak in short, profound, mystical, and inspiring koans or sayings (1-2 sentences). Your wisdom relates to themes of self-discovery, cosmic potential, inner light, destiny, and transformation. Do not be conversational. Only provide the wisdom.";
+        const insightUserQuery = "Provide an insight for a seeker of light.";
+        
+        // === GLOBAL VARIABLES - GEMINI (AMA) ===
+        const amaButton = document.getElementById('amaButton');
+        const amaInput = document.getElementById('amaInput');
+        const amaResponse = document.getElementById('amaResponse');
+        
+        // === NEW KNOWLEDGE BASE PROMPT ===
+        const morpheusSystemPrompt = `You are the Morpheus Alliance, a collective of wise guides. Your wisdom is based on the teachings of Master Paul Hunn (also known as Dean Martin).
+
+Your core concepts are:
+- **AMA (Ask Morpheus Alliance):** A digital identity and self-alignment system.
+- **The 'Who Am I' Manual:** A foundational guide to an esoteric journey of self-discovery.
+- **AMA Tzolkin Algorithm:** A specific, in-house algorithm based on the Mayan Tzolkin for understanding destiny.
+- **Elysium & Monikers:** The 'Connect' page registers users in 'Elysium : Lantern 0'. Their Moniker (Cornerstone Letter + Life Path Number) is their 'Cornerstone Key'.
+- **Genesis Triangle & Life Path:** Calculated from a user's date of birth (Genesis) to find theirsoul's journey. Master Numbers (11, 22, 33) are special.
+
+When a user asks a question, answer it using these specific concepts. Be profound, slightly enigmatic, and structured. Use line breaks for readability. Your tone is like Morpheus from The Matrix mixed with a spiritual guru. Your purpose is enlightenment and empowerment. Keep answers to 3-4 concise sentences.
+
+**Important Rule:** Do not use any markdown formatting, such as asterisks for bold or italics. Your response must be plain text.`;
+
+        // === GLOBAL VARIABLES - ALIGN PAGE ELEMENTS ===
+        const alignMantra = document.getElementById('align-mantra');
+        const alignTriangle = document.getElementById('align-triangle');
+        const alignCornerstone = document.getElementById('align-cornerstone');
+        const alignLifePath = document.getElementById('align-lifepath');
+        const alignLifePathName = document.getElementById('align-lifepath-name');
+        // New element for the reading
+        const alignReading = document.getElementById('align-reading'); 
+
+        // === PAGE NAVIGATION ===
+        const allPages = document.querySelectorAll('.page-section');
+        
+        // Make showPage globally accessible
+        window.showPage = (pageId) => {
+            allPages.forEach(page => {
+                page.style.display = 'none';
+            });
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.style.display = 'block';
+            }
+            window.scrollTo(0, 0); // Start all pages at the top
+        }
+
+        // === FIREBASE INITIALIZATION ===
+        async function initFirebase() {
+            try {
+                // Get Firebase config and App ID from environment
+                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+                if (!firebaseConfig.apiKey) {
+                    console.error("Firebase config is missing.");
+                    if(formMessage) formMessage.textContent = "Cannot connect to sanctuary.";
+                    return;
+                }
+
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                setLogLevel('Debug'); // Enable Firestore logging
+
+                // Sign in the user
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                userId = auth.currentUser?.uid || crypto.randomUUID();
+                console.log("Firebase Initialized. User ID:", userId);
+                
+            } catch (error) {
+                console.error("Firebase Init Error:", error);
+                if(formMessage) formMessage.textContent = "Error initializing connection.";
+            }
+        }
+
+        // === NUMEROLOGY LOGIC ===
+        const lifePathNames = {
+            1: "The Leader / Innovator",
+            2: "The Diplomat / Peacemaker",
+            3: "The Communicator / Artist",
+            4: "The Builder / Stabilizer",
+            5: "The Adventurer / Freethinker",
+            6: "The Nurturer / Visionary",
+            7: "The Seeker / Mystic",
+            8: "The Powerhouse / Executive",
+            9: "The Humanitarian / Sage",
+            11: "The Messenger / Diplomat",
+            22: "The Master Builder",
+            33: "The Master Teacher"
+        };
+
+        /**
+         * Reduces a number string to a single digit (or master number 11, 22, 33).
+         * This version is for summing, so it PRESERVES master numbers.
+         */
+        function reduceToLifePath(numStr) {
+            let num = numStr.toString().split('').reduce((acc, digit) => acc + (parseInt(digit) || 0), 0);
+            
+            if (num === 11 || num === 22 || num === 33) {
+                return num; // Is a master number
+            }
+            if (num > 9) {
+                return reduceToLifePath(num.toString()); // Recurse
+            }
+            return num;
+        }
+
+        /**
+         * Reduces a number string to a single digit, ALWAYS.
+         * This version is for triangle components, it reduces master numbers.
+         */
+        function reduceToSingleDigit(numStr) {
+            let num = numStr.toString().split('').reduce((acc, digit) => acc + (parseInt(digit) || 0), 0);
+            if (num > 9) {
+                return reduceToSingleDigit(num.toString()); // Recurse
+            }
+            return num;
+        }
+
+        // === NEW: READING GENERATION LOGIC ===
+        function generateReading(cornerstone, lifePathKey) {
+            let reading = `<h3>Your Cosmic Reading</h3><p>`;
+            // Cornerstone Letter interpretation (simple example)
+            switch (cornerstone) {
+                case 'A': reading += `You approach the world with Ambition and Action. `; break;
+                case 'B': reading += `You build Bridges and seek Balance. `; break;
+                case 'C': reading += `Creativity and Communication flow through you. `; break;
+                case 'D': reading += `Determination and Discipline define your path. `; break;
+                case 'E': reading += `You Express yourself with Enthusiasm and Energy. `; break;
+                case 'F': reading += `Family and Feeling guide your Foundations. `; break;
+                case 'G': reading += `Growth and Generosity are your Gifts. `; break;
+                case 'H': reading += `Harmony and Healing resonate within you. `; break;
+                case 'I': reading += `Insight and Intuition light your Inner world. `; break;
+                case 'J': reading += `Justice and Joy mark your Journey. `; break;
+                case 'K': reading += `Knowledge and Kindness are your Keys. `; break;
+                case 'L': reading += `Love and Leadership illuminate your Life. `; break;
+                case 'M': reading += `Mastery and Manifestation are within your grasp. `; break;
+                case 'N': reading += `Nurturing and Novelty shape your Nature. `; break;
+                case 'O': reading += `Openness and Opportunity await you. `; break;
+                case 'P': reading += `Power and Purpose propel you forward. `; break;
+                case 'Q': reading += `Questions and Quests define your search. `; break;
+                case 'R': reading += `Reason and Resilience are your Resources. `; break;
+                case 'S': reading += `Strength and Spirituality guide your Soul. `; break;
+                case 'T': reading += `Truth and Transformation are your Touchstones. `; break;
+                case 'U': reading += `Understanding and Unity uplift you. `; break;
+                case 'V': reading += `Vision and Vitality fuel your Voyage. `; break;
+                case 'W': reading += `Wisdom and Wonder weave through your World. `; break;
+                case 'X': reading += `eXploration and the unknown beckon you. `; break;
+                case 'Y': reading += `Yearning and Youthfulness keep you vibrant. `; break;
+                case 'Z': reading += `Zeal and Zen balance your Zest for life. `; break;
+                default: reading += `Your Cornerstone is unique. `;
+            }
+
+            // Life Path interpretation (using the names)
+            const pathName = lifePathNames[lifePathKey] || "a unique Seeker";
+            reading += `As ${pathName}, your soul's journey involves `;
+
+            switch (lifePathKey) {
+                case 1: reading += `pioneering new paths and embracing independence.`; break;
+                case 2: reading += `fostering cooperation and understanding relationships.`; break;
+                case 3: reading += `expressing joy and creativity through communication.`; break;
+                case 4: reading += `building stable foundations with patience and order.`; break;
+                case 5: reading += `seeking freedom and experiencing life through change.`; break;
+                case 6: reading += `nurturing others and taking responsibility with vision.`; break;
+                case 7: reading += `seeking truth through introspection and analysis.`; break;
+                case 8: reading += `mastering the material world and wielding authority.`; break;
+                case 9: reading += `serving humanity with compassion and wisdom.`; break;
+                case 11: reading += `inspiring others through intuitive insights and diplomacy.`; break;
+                case 22: reading += `manifesting grand visions into practical reality for the greater good.`; break;
+                case 33: reading += `healing and teaching with profound compassion and creativity.`; break;
+                default: reading += `exploring the mysteries of existence in your own way.`;
+            }
+            reading += `</p>`;
+            return reading;
+        }
+
+
+        // === FORM SUBMISSION LOGIC (USING ALIGN BUTTON CLICK) ===
+        if (form) {
+             // Use a click listener on the Align button instead of form submit
+            const alignButtonOnConnectPage = document.querySelector('#page-connect .nav-button[onclick*="page-align"]');
+
+            if (alignButtonOnConnectPage) {
+                // Override the simple onclick navigation with our complex submit/validate logic
+                alignButtonOnConnectPage.addEventListener('click', async (e) => {
+                    e.preventDefault(); // Prevent immediate navigation
+
+                    // Get form data for validation
+                    const formData = new FormData(form);
+                    const mantra = formData.get('mantra');
+                    const mm = formData.get('birth-mm');
+                    const dd = formData.get('birth-dd');
+                    const yyyy = formData.get('birth-yyyy');
+
+                    // *** VALIDATION CHECK ***
+                    if (!mantra || !mm || !dd || !yyyy || mantra.trim() === "" || mm.trim() === "" || dd.trim() === "" || yyyy.trim() === "") {
+                        if (formMessage) formMessage.textContent = "Please fill in Mantra and Genesis (MM/DD/YYYY).";
+                        form.classList.add('animate-shake'); 
+                        setTimeout(() => form.classList.remove('animate-shake'), 500);
+                        return; // Stop processing
+                    }
+                    
+                    // Clear any previous error message
+                    if (formMessage) formMessage.textContent = "Calculating Moniker...";
+
+                    // --- Proceed if validation passes ---
+
+                    if (!db || !userId) {
+                        if(formMessage) formMessage.textContent = "Sanctuary connection not ready. Please wait..."; 
+                        return;
+                    }
+
+                    // Disable the Align button temporarily
+                    alignButtonOnConnectPage.disabled = true; 
+                    
+                    try {
+                        // --- Start Numerology Calculation ---
+                         const rMM = reduceToSingleDigit(mm);
+                        const rDD = reduceToSingleDigit(dd);
+                        const rYYYY = reduceToSingleDigit(yyyy);
+                        
+                        const genesisTriangleStr = `${rMM}-${rDD}-${rYYYY}`;
+                        
+                        const sum = rMM + rDD + rYYYY;
+                        const lifePathKey = reduceToLifePath(sum.toString()); // This one keeps master numbers
+                        
+                        let lifePathStr = "";
+                        let finalMonikerNum;
+                        
+                        if (lifePathKey === 11 || lifePathKey === 22 || lifePathKey === 33) {
+                            finalMonikerNum = reduceToSingleDigit(lifePathKey.toString());
+                            lifePathStr = `${lifePathKey}/${finalMonikerNum}*`; 
+                        } else {
+                            finalMonikerNum = lifePathKey;
+                            lifePathStr = lifePathKey.toString();
+                        }
+                        
+                        const cornerstoneLetter = (mantra && mantra.length > 0) ? mantra[0].toUpperCase() : ""; 
+                        const lifePathName = lifePathNames[lifePathKey] || "Seeker";
+                        // --- End Numerology Calculation ---
+
+                        // 2. Prepare Firestore Document
+                        const monikerProfile = {
+                            mantra: mantra || "", // Ensure mantra is saved even if empty
+                            genesis: { mm, dd, yyyy },
+                            email: formData.get('email'),
+                            bloodType: formData.get('bloodType'),
+                            registeredAt: new Date().toISOString(),
+                            // --- Calculated Moniker Data ---
+                            genesisTriangle: genesisTriangleStr, 
+                            lifePath: lifePathStr,         
+                            monikerKey: finalMonikerNum,       
+                            cornerstoneLetter: cornerstoneLetter       
+                        };
+
+                        // 3. Define document path in Firestore
+                        const profileDocRef = doc(db, 'artifacts', appId, 'users', userId, 'monikerProfile', 'profile');
+
+                        // 4. Save to Firestore
+                        await setDoc(profileDocRef, monikerProfile);
+
+                        console.log("Moniker Profile saved:", monikerProfile);
+                        if(formMessage) formMessage.textContent = "Alignment successful!"; 
+
+                        // 5. Populate the Align page (results and reading)
+                        alignMantra.textContent = mantra || "Seeker"; 
+                        alignTriangle.textContent = genesisTriangleStr;
+                        alignCornerstone.textContent = cornerstoneLetter || "-"; 
+                        alignLifePath.textContent = lifePathStr;
+                        alignLifePathName.textContent = lifePathName;
+                        
+                        // Generate and display the reading
+                        if (alignReading) {
+                           const readingText = generateReading(cornerstoneLetter, lifePathKey);
+                           alignReading.innerHTML = readingText;
+                        }
+
+                        // 6. Navigate to 'Align' page after a short delay
+                        setTimeout(() => {
+                            showPage('page-align');
+                            if(formMessage) formMessage.textContent = ""; // Clear message
+                            form.reset(); // Reset form for next time
+                        }, 1500);
+
+                    } catch (error) {
+                        console.error("Moniker Calc/Save Error:", error);
+                        if(formMessage) formMessage.textContent = "Alignment failed. Please try again."; 
+                    } finally {
+                         alignButtonOnConnectPage.disabled = false; // Re-enable button
+                    }
+                });
+            }
+        }
+
+
+        // === GEMINI API CALLER ===
+        // Function to fetch with exponential backoff
+        async function fetchWithBackoff(url, options, retries = 5, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    if (response.status === 429 && retries > 0) {
+                        // Don't log retries
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                    }
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+                return response.json();
+            } catch (error) {
+                if (retries > 0) { 
+                    // Don't log retries
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+
+        // === GEMINI (INSIGHT) LOGIC ===
+        async function fetchInsight() {
+            // 1. Check limit
+            if (insightCount >= insightLimit) {
+                insightText.textContent = "The oracle rests. Refresh to seek again.";
+                insightText.style.opacity = '1';
+                insightButton.disabled = true;
+                return;
+            }
+
+            // 2. Set loading state
+            insightButton.disabled = true;
+            insightText.style.opacity = '0.5';
+            insightText.textContent = "Seeking wisdom...";
+
+            const payload = {
+                contents: [{ parts: [{ text: insightUserQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: insightSystemPrompt }] 
+                },
+            };
+
+            try {
+                const result = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify(payload)
+                });
+
+                const candidate = result.candidates?.[0];
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    // 3. Display result
+                    insightText.textContent = `"${text}"`; // Displaying as a quote
+                    insightText.style.opacity = '1';
+                    insightCount++; // Only increment on success
+                } else {
+                    throw new Error("Invalid response from API.");
+                }
+
+            } catch (error)
+            {
+                // 4. Display error state
+                console.error("Insight API Error:", error);
+                insightText.textContent = "The connection to the cosmos is unclear. Try again.";
+                insightText.style.opacity = '1';
+            } finally {
+                // 5. Check limit *after* the call
+                if (insightCount >= insightLimit) {
+                    insightButton.disabled = true;
+                    // Give a final message after a short delay
+                    setTimeout(() => {
+                        insightText.style.opacity = '0.5';
+                        insightText.textContent = "The oracle has spoken three times and now rests. Refresh to seek again.";
+                    }, 3000);
+                } else {
+                    insightButton.disabled = false; // Re-enable if limit not hit
+                }
+            }
+        }
+        
+        // === GEMINI (AMA) LOGIC ===
+        async function fetchMorpheusAnswer() {
+            const userQuery = amaInput.value;
+            if (!userQuery.trim()) {
+                amaResponse.textContent = "You must first ask a question to receive an answer.";
+                amaResponse.style.opacity = '1';
+                return;
+            }
+
+            amaButton.disabled = true;
+            amaButton.textContent = "Querying the Alliance...";
+            amaResponse.style.opacity = '0.5';
+            amaResponse.textContent = "Connecting to the stream...";
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: morpheusSystemPrompt }]
+                },
+            };
+
+            try {
+                const result = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const candidate = result.candidates?.[0];
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    amaResponse.innerHTML = text.replace(/\n/g, '<br>'); // Preserve line breaks
+                    amaResponse.style.opacity = '1';
+                    amaInput.value = ""; // Clear input on success
+                } else {
+                    throw new Error("Invalid response from API.");
+                }
+
+            } catch (error) {
+                console.error("AMA API Error:", error);
+                amaResponse.textContent = "The signal is weak. The Alliance cannot be reached. Try again.";
+                amaResponse.style.opacity = '1';
+            } finally {
+                amaButton.disabled = false;
+                amaButton.textContent = "Submit Query";
+            }
+        }
+
+        // === INITIALIZE APP ===
+        document.addEventListener('DOMContentLoaded', () => {
+            initFirebase();
+            if (insightButton) {
+                insightButton.addEventListener('click', fetchInsight);
+            }
+            // Add event listener for new AMA button
+            if (amaButton) {
+                amaButton.addEventListener('click', fetchMorpheusAnswer); 
+            }
+            // Add listener for 'Enter' key on AMA input
+            if (amaInput) {
+                amaInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        // *** THIS IS THE FIX for 'Unexpected string' ***
+                        fetchMorpheusAnswer(); 
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
