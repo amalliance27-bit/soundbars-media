@@ -1,0 +1,892 @@
+from zipfile import ZipFile
+from textwrap import dedent
+
+base_path = "/mnt/data"
+
+months = {
+    "01_January.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - January</title>
+    </head>
+    <body>
+    <h1>January – International & Fun Observances</h1>
+    <h2>January 1</h2>
+    <p><strong>New Year’s Day</strong> – First day of the Gregorian calendar, celebrated worldwide.<br>
+    <strong>Global Family Day</strong> – Unofficial peace-and-sharing day emphasizing global unity.<br>
+    <strong>Polar Bear Plunge Day</strong> – Tradition of jumping into icy water, often to raise money for charity.</p>
+
+    <h2>January 2</h2>
+    <p><strong>Science Fiction Day</strong> – Honors sci-fi and often linked to Isaac Asimov’s birthday.<br>
+    <strong>Buffet Day</strong> – Lighthearted day for “all-you-can-eat” indulgence.<br>
+    <strong>“Run It up the Flagpole” Day</strong> – Encourages testing new ideas to see who “salutes.”</p>
+
+    <h2>January 3</h2>
+    <p><strong>Festival of Sleep Day</strong> – Catch up on rest after the holidays.<br>
+    <strong>Fruitcake Toss Day</strong> – Comic excuse to get rid of leftover fruitcake.</p>
+
+    <h2>January 4</h2>
+    <p><strong>World Braille Day</strong> – Raises awareness of Braille as vital communication for blind and visually impaired people.<br>
+    <strong>Trivia Day</strong> – Celebrates trivia lovers and obscure facts.</p>
+
+    <h2>January 5</h2>
+    <p><strong>Bird Day</strong> – Focus on bird appreciation and conservation.</p>
+
+    <h2>January 6</h2>
+    <p><strong>Bean Day</strong> – Celebrates beans and their role in cuisines worldwide.</p>
+
+    <h2>January 7</h2>
+    <p><strong>Old Rock Day</strong> – For fossil and rock fans to appreciate ancient stones.</p>
+
+    <h2>January 8</h2>
+    <p><strong>Earth’s Rotation Day</strong> – Marks Léon Foucault’s demonstration that Earth rotates.<br>
+    <strong>Bubble Bath Day</strong> – Encourages relaxing self-care with a bath.</p>
+
+    <h2>January 9</h2>
+    <p><strong>Static Electricity Day</strong> – Playful nod to winter static shocks.<br>
+    <strong>Word Nerd Day</strong> – For lovers of vocabulary and wordplay.</p>
+
+    <h2>January 10</h2>
+    <p><strong>Cut Your Energy Costs Day</strong> – Promotes energy-saving habits.</p>
+
+    <h2>January 11</h2>
+    <p><strong>Learn Your Name in Morse Code Day</strong> – Encourages learning Morse for fun.</p>
+
+    <h2>January 12</h2>
+    <p><strong>National Marzipan Day</strong> – Celebrates almond-based confectionery.<br>
+    <strong>Clean Off Your Desk Day</strong> – Often the second Monday of January, inspiring fresh workspace organization.</p>
+
+    <h2>January 13</h2>
+    <p><strong>Make Your Dreams Come True Day</strong> – Motivational nudge to take action on goals.</p>
+
+    <h2>January 14</h2>
+    <p><strong>Organize Your Home Day</strong> – Declutter and reset living spaces.</p>
+
+    <h2>January 15</h2>
+    <p><strong>Strawberry Ice Cream Day</strong> – Celebrates the classic flavor.<br>
+    <strong>Bagel and Lox Day</strong> – Honors the bagel-with-smoked-salmon combo.</p>
+
+    <h2>January 16</h2>
+    <p><strong>National Nothing Day</strong> – A tongue-in-cheek day “to do nothing.”<br>
+    <strong>International Hot and Spicy Food Day</strong> – For chili-heads worldwide.</p>
+
+    <h2>January 17</h2>
+    <p><strong>Ditch New Year’s Resolution Day</strong> – Recognizes how many resolutions get dropped.<br>
+    <strong>Benjamin Franklin Day</strong> – Commemorates Franklin’s birthday.<br>
+    <strong>Kid Inventors’ Day</strong> – Celebrates children’s creativity and inventions.<br>
+    <strong>Soup Swap Day</strong> – Community tradition of exchanging homemade soups.</p>
+
+    <h2>January 18</h2>
+    <p><strong>Thesaurus Day</strong> – Honors Peter Mark Roget and richer vocabulary.</p>
+
+    <h2>January 19</h2>
+    <p><strong>Tin Can Day</strong> – Marks early canning innovations.<br>
+    <strong>Popcorn Day</strong> – Celebrates the classic snack.</p>
+
+    <h2>January 20</h2>
+    <p><strong>Penguin Awareness Day</strong> – Highlights penguin species and conservation.</p>
+
+    <h2>January 21</h2>
+    <p><strong>Squirrel Appreciation Day</strong> – Encourages feeding and appreciating squirrels.</p>
+
+    <h2>January 22</h2>
+    <p><strong>Hot Sauce Day</strong> – For fans of spicy condiments.<br>
+    <strong>Answer Your Cat’s Questions Day</strong> – Playfully “respond” to what your cat might be asking.</p>
+
+    <h2>January 23</h2>
+    <p><strong>National Handwriting Day</strong> – Promotes handwriting and calligraphy.</p>
+
+    <h2>January 24</h2>
+    <p><strong>International Day of Education</strong> – U.N. day on inclusive, quality education.<br>
+    <strong>Compliment Day</strong> – Focus on sincere positive words.<br>
+    <strong>Macintosh Computer Day</strong> – Marks launch of Apple’s original Mac in 1984.</p>
+
+    <h2>January 25</h2>
+    <p><strong>Opposite Day</strong> – Humorous day of saying/doing the opposite.</p>
+
+    <h2>January 26</h2>
+    <p><strong>International Customs Day</strong> – Honors customs officials worldwide.<br>
+    <strong>International Day of Clean Energy</strong> – New U.N. observance on sustainable energy.<br>
+    <strong>Spouse’s Day</strong> – Quiet appreciation for partners.</p>
+
+    <h2>January 27</h2>
+    <p><strong>International Holocaust Remembrance Day</strong> – U.N. memorial day for Holocaust victims.<br>
+    <strong>Chocolate Cake Day</strong> – Dedicated to enjoying chocolate cake.</p>
+
+    <h2>January 28</h2>
+    <p><strong>Data Privacy Day</strong> – Awareness around digital privacy and data protection.<br>
+    <strong>Fun at Work Day</strong> – Encourages joy in the workplace.</p>
+
+    <h2>January 29</h2>
+    <p><strong>Puzzle Day</strong> – Crosswords, jigsaws, riddles—brain training fun.</p>
+
+    <h2>January 30</h2>
+    <p><strong>Croissant Day</strong> – Celebrates the flaky crescent pastry.</p>
+
+    <h2>January 31</h2>
+    <p><strong>Backwards Day</strong> – A silly day to invert routines and expectations.</p>
+    </body>
+    </html>
+    """),
+    "02_February.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - February</title>
+    </head>
+    <body>
+    <h1>February – International & Fun Observances</h1>
+
+    <h2>February 1</h2>
+    <p><strong>World Hijab Day</strong> – Encourages understanding of women who choose to wear the hijab.</p>
+
+    <h2>February 2</h2>
+    <p><strong>World Wetlands Day</strong> – Highlights the value of wetlands ecosystems.<br>
+    <strong>Groundhog Day</strong> – North American folklore about predicting the length of winter.</p>
+
+    <h2>February 4</h2>
+    <p><strong>World Cancer Day</strong> – Global awareness and action on cancer prevention and care.</p>
+
+    <h2>February 5</h2>
+    <p><strong>Chocolate Fondue Day</strong> – Celebrates chocolate fondue desserts.<br>
+    <strong>Weatherperson’s Day</strong> – Honors meteorologists and weather forecasters.</p>
+
+    <h2>February 6</h2>
+    <p><strong>International Day of Zero Tolerance for Female Genital Mutilation</strong> – Calls for an end to FGM.</p>
+
+    <h2>February 7</h2>
+    <p><strong>Send a Card to a Friend Day</strong> – Revives handwritten or mailed greetings.</p>
+
+    <h2>February 8</h2>
+    <p><strong>Safer Internet Day</strong> – Promotes safer, more responsible use of online technology.</p>
+
+    <h2>February 9</h2>
+    <p><strong>Pizza Day</strong> – Global love letter to pizza.</p>
+
+    <h2>February 11</h2>
+    <p><strong>International Day of Women and Girls in Science</strong> – Supports gender equality in STEM.<br>
+    <strong>Inventors’ Day (US)</strong> – Tied to Thomas Edison’s birthday, honoring inventors.</p>
+
+    <h2>February 13</h2>
+    <p><strong>World Radio Day</strong> – Celebrates radio’s role in communication and culture.<br>
+    <strong>Galentine’s Day</strong> – Pop-culture celebration of women’s friendships.</p>
+
+    <h2>February 14</h2>
+    <p><strong>Valentine’s Day</strong> – Global day of love, romance, and affection.</p>
+
+    <h2>February 15</h2>
+    <p><strong>International Childhood Cancer Day</strong> – Raises awareness and support for children with cancer.<br>
+    <strong>Singles Awareness Day</strong> – Self-love and single-life celebration.</p>
+
+    <h2>February 17</h2>
+    <p><strong>Random Acts of Kindness Day</strong> – Encourages spontaneous kindness.</p>
+
+    <h2>February 20</h2>
+    <p><strong>World Day of Social Justice</strong> – Focuses on equality and fair opportunity.</p>
+
+    <h2>February 21</h2>
+    <p><strong>International Mother Language Day</strong> – Promotes linguistic and cultural diversity.</p>
+
+    <h2>February 22</h2>
+    <p><strong>World Thinking Day</strong> – Girl Guides/Scouts solidarity and reflection day.<br>
+    <strong>Margarita Day</strong> – Cocktail-themed fun observance.</p>
+
+    <h2>February 27</h2>
+    <p><strong>World NGO Day</strong> – Recognizes non-governmental organizations worldwide.<br>
+    <strong>International Polar Bear Day</strong> – Highlights climate change threats to polar bears.</p>
+
+    <h2>February 28</h2>
+    <p><strong>National Science Day (India)</strong> – Commemorates C.V. Raman’s discovery of the Raman effect.<br>
+    <strong>Floral Design Day</strong> – Celebrates floral art.</p>
+
+    <h2>February 29 (or last day of February)</h2>
+    <p><strong>Rare Disease Day</strong> – Raises awareness and support for people with rare diseases.</p>
+    </body>
+    </html>
+    """),
+    "03_March.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - March</title>
+    </head>
+    <body>
+    <h1>March – International & Fun Observances</h1>
+
+    <h2>March 1</h2>
+    <p><strong>Zero Discrimination Day</strong> – Promotes equality and inclusion.<br>
+    <strong>World Seagrass Day</strong> – Draws attention to seagrass ecosystems.</p>
+
+    <h2>March 3</h2>
+    <p><strong>World Wildlife Day</strong> – Celebrates wild animals and plants.<br>
+    <strong>World Hearing Day</strong> – Focus on hearing health and prevention of hearing loss.</p>
+
+    <h2>March 4</h2>
+    <p><strong>World Obesity Day</strong> – Addresses the global obesity challenge.<br>
+    <strong>Grammar Day</strong> – For fans of good grammar and language.</p>
+
+    <h2>March 6</h2>
+    <p><strong>World Tennis Day</strong> – Promotes participation in tennis.<br>
+    <strong>Dentist’s Day</strong> – Appreciation for dentists and oral health.</p>
+
+    <h2>March 8</h2>
+    <p><strong>International Women’s Day</strong> – Global celebration of women’s achievements and gender equality.<br>
+    <strong>International Women’s Collaboration Brew Day</strong> – Women brewers join forces to brew and network.</p>
+
+    <h2>March 10</h2>
+    <p><strong>International Day of Women Judges</strong> – Highlights women’s role in the judiciary.<br>
+    <strong>Mario Day</strong> – Celebrates Nintendo’s Mario (MAR10).</p>
+
+    <h2>March 14</h2>
+    <p><strong>Pi Day</strong> – Honors the mathematical constant π (3.14) with math and pies.</p>
+
+    <h2>March 17</h2>
+    <p><strong>Saint Patrick’s Day</strong> – Irish national day, now an international cultural celebration.</p>
+
+    <h2>March 20</h2>
+    <p><strong>International Day of Happiness</strong> – Recognizes happiness as a global goal.<br>
+    <strong>World Storytelling Day</strong> – Highlights oral and written storytelling traditions.<br>
+    <strong>French Language Day</strong> – U.N. language celebration.</p>
+
+    <h2>March 21</h2>
+    <p><strong>International Day for the Elimination of Racial Discrimination</strong>.<br>
+    <strong>World Poetry Day</strong>.<br>
+    <strong>International Day of Nowruz</strong> – Persian New Year.<br>
+    <strong>World Down Syndrome Day</strong> – Advocates for the rights and inclusion of people with Down syndrome.<br>
+    <strong>International Day of Forests</strong> – Focuses on all types of forests.</p>
+
+    <h2>March 22</h2>
+    <p><strong>World Water Day</strong> – Highlights freshwater and water security issues.<br>
+    <strong>International Goof Off Day</strong> – Encourages rest, play, and doing “nothing productive.”</p>
+
+    <h2>March 23</h2>
+    <p><strong>World Meteorological Day</strong> – Marks the role of National Meteorological and Hydrological Services.<br>
+    <strong>National Puppy Day</strong> – Promotes pet adoption and puppy love.</p>
+
+    <h2>March 24</h2>
+    <p><strong>World Tuberculosis Day</strong> – Raises awareness of TB and efforts to end it.<br>
+    <strong>International Day for the Right to the Truth Regarding Gross Human Rights Violations</strong>.</p>
+
+    <h2>March 25</h2>
+    <p><strong>International Day of Remembrance of the Victims of Slavery and the Transatlantic Slave Trade</strong>.<br>
+    <strong>Tolkien Reading Day</strong> – Fans read works by J.R.R. Tolkien.<br>
+    <strong>Waffle Day</strong> – Swedish-born waffle celebration.</p>
+
+    <h2>March 26</h2>
+    <p><strong>Purple Day for Epilepsy Awareness</strong> – People wear purple to support epilepsy awareness.<br>
+    <strong>Make Up Your Own Holiday Day</strong> – Invent and celebrate your own “holiday.”</p>
+
+    <h2>March 27</h2>
+    <p><strong>World Theatre Day</strong> – Highlights stage arts and theatre’s social impact.<br>
+    <strong>Spanish Paella Day</strong> – Celebrates the iconic rice dish.</p>
+
+    <h2>March 30</h2>
+    <p><strong>Doctors’ Day</strong> (in several countries) – Honors physicians.<br>
+    <strong>Take a Walk in the Park Day</strong> – Encourages time in nature.</p>
+
+    <h2>March 31</h2>
+    <p><strong>International Transgender Day of Visibility</strong> – Celebrates transgender people and raises awareness of discrimination.<br>
+    <strong>World Backup Day</strong> – Reminder to back up digital data.</p>
+    </body>
+    </html>
+    """),
+    "04_April.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - April</title>
+    </head>
+    <body>
+    <h1>April – International & Fun Observances</h1>
+
+    <h2>April 1</h2>
+    <p><strong>April Fools’ Day</strong> – Pranks, jokes, and playful hoaxes.<br>
+    <strong>International Fun at Work Day</strong> – Injects humor and play into the workplace.</p>
+
+    <h2>April 2</h2>
+    <p><strong>World Autism Awareness Day</strong> – Acceptance and understanding of people on the autism spectrum.<br>
+    <strong>International Children’s Book Day</strong> – Promotes children’s literature.</p>
+
+    <h2>April 4</h2>
+    <p><strong>International Day for Mine Awareness</strong> – Focuses on landmine clearance and survivor assistance.<br>
+    <strong>Hug a Newsperson Day</strong> – Light-hearted appreciation for journalists.</p>
+
+    <h2>April 5</h2>
+    <p><strong>International Day of Conscience</strong> – Encourages moral reflection and responsible action.</p>
+
+    <h2>April 6</h2>
+    <p><strong>International Day of Sport for Development and Peace</strong> – Recognizes sport as a tool for social change.<br>
+    <strong>Carbonara Day</strong> – Pasta carbonara celebration driven by Italian food culture.</p>
+
+    <h2>April 7</h2>
+    <p><strong>World Health Day</strong> – Global health awareness led by WHO.</p>
+
+    <h2>April 8</h2>
+    <p><strong>International Romani Day</strong> – Highlights Romani culture and rights.</p>
+
+    <h2>April 10</h2>
+    <p><strong>Siblings Day</strong> – Celebrates sibling relationships.</p>
+
+    <h2>April 11</h2>
+    <p><strong>Pet Day</strong> – Appreciation of pets and their role in our lives.<br>
+    <strong>World Parkinson’s Day</strong> (often observed April 11) – Awareness for Parkinson’s disease.</p>
+
+    <h2>April 12</h2>
+    <p><strong>International Day of Human Space Flight</strong> – Commemorates Yuri Gagarin’s first human space flight.<br>
+    <strong>Grilled Cheese Day</strong> – Comfort-food sandwich celebration.</p>
+
+    <h2>April 14</h2>
+    <p><strong>World Chagas Disease Day</strong> – Highlights a neglected tropical disease.</p>
+
+    <h2>April 15</h2>
+    <p><strong>World Art Day</strong> – Promotes creative expression and appreciation of art.</p>
+
+    <h2>April 16</h2>
+    <p><strong>World Voice Day</strong> – Encourages healthy use and appreciation of the human voice.</p>
+
+    <h2>April 17</h2>
+    <p><strong>World Haemophilia Day</strong> – Raises awareness of bleeding disorders.</p>
+
+    <h2>April 18</h2>
+    <p><strong>World Heritage Day</strong> (International Day for Monuments and Sites) – Protects cultural and natural heritage.</p>
+
+    <h2>April 20</h2>
+    <p><strong>Chinese Language Day</strong> – U.N. day celebrating the Chinese language and culture.</p>
+
+    <h2>April 21</h2>
+    <p><strong>World Creativity and Innovation Day</strong> – Encourages creative problem-solving worldwide.</p>
+
+    <h2>April 22</h2>
+    <p><strong>Earth Day</strong> – Global environmental protection movement focus.</p>
+
+    <h2>April 23</h2>
+    <p><strong>World Book and Copyright Day</strong> – Promotes reading and respect for authors’ rights.<br>
+    <strong>English Language Day</strong> – U.N. observance supporting English language and literature.</p>
+
+    <h2>April 24</h2>
+    <p><strong>International Day of Multilateralism and Diplomacy for Peace</strong>.</p>
+
+    <h2>April 25</h2>
+    <p><strong>World Malaria Day</strong> – Focus on preventing and treating malaria.<br>
+    <strong>International DNA Day</strong> – Marks publication of DNA’s double-helix structure.</p>
+
+    <h2>April 26</h2>
+    <p><strong>World Intellectual Property Day</strong> – Highlights IP’s role in innovation and creativity.</p>
+
+    <h2>April 28</h2>
+    <p><strong>World Day for Safety and Health at Work</strong> – Promotes safe working conditions.</p>
+
+    <h2>April 29</h2>
+    <p><strong>International Dance Day</strong> – Celebrates dance across cultures.</p>
+
+    <h2>April 30</h2>
+    <p><strong>International Jazz Day</strong> – Global music celebration recognizing jazz as a force for unity.</p>
+    </body>
+    </html>
+    """),
+    "05_May.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - May</title>
+    </head>
+    <body>
+    <h1>May – International & Fun Observances</h1>
+
+    <h2>May 1</h2>
+    <p><strong>International Workers’ Day</strong> – Labor/worker rights and solidarity worldwide.</p>
+
+    <h2>May 2</h2>
+    <p><strong>World Tuna Day</strong> – Promotes sustainable tuna fishing and ocean health.</p>
+
+    <h2>May 3</h2>
+    <p><strong>World Press Freedom Day</strong> – U.N. day defending media freedom and safety of journalists.</p>
+
+    <h2>May 4</h2>
+    <p><strong>International Firefighters’ Day</strong> – Honors firefighters’ service.<br>
+    <strong>Star Wars Day</strong> – “May the 4th be with you.”</p>
+
+    <h2>May 5</h2>
+    <p><strong>International Day of the Midwife</strong> – Recognizes midwives’ critical role.<br>
+    <strong>Cinco de Mayo</strong> – Mexican cultural celebration (Battle of Puebla anniversary).</p>
+
+    <h2>May 6</h2>
+    <p><strong>International No Diet Day</strong> – Encourages body acceptance and challenges diet culture.</p>
+
+    <h2>May 8</h2>
+    <p><strong>World Red Cross and Red Crescent Day</strong> – Honors humanitarian organizations and volunteers.<br>
+    <strong>World Ovarian Cancer Day</strong> – Raises awareness of ovarian cancer.</p>
+
+    <h2>May 9</h2>
+    <p><strong>Europe Day</strong> – Celebrates European integration.</p>
+
+    <h2>May 10</h2>
+    <p><strong>World Lupus Day</strong> – Brings attention to lupus and its impact.</p>
+
+    <h2>May 12</h2>
+    <p><strong>International Nurses Day</strong> – Celebrated on Florence Nightingale’s birthday.<br>
+    <strong>ME/CFS Awareness Day</strong> – Focus on Myalgic Encephalomyelitis/Chronic Fatigue Syndrome.</p>
+
+    <h2>May 15</h2>
+    <p><strong>International Day of Families</strong> – U.N. day on family issues and policy.</p>
+
+    <h2>May 16</h2>
+    <p><strong>International Day of Light</strong> – Highlights light-based science and its applications.<br>
+    <strong>International Day of Living Together in Peace</strong> – Encourages reconciliation and unity.</p>
+
+    <h2>May 17</h2>
+    <p><strong>International Day Against Homophobia, Biphobia and Transphobia</strong> – Supports LGBTQ+ rights.<br>
+    <strong>World Telecommunication and Information Society Day</strong> – Focus on ICT and digital inclusion.</p>
+
+    <h2>May 18</h2>
+    <p><strong>International Museum Day</strong> – Promotes museums as cultural exchange spaces.</p>
+
+    <h2>May 20</h2>
+    <p><strong>World Bee Day</strong> – Protects pollinators and biodiversity.<br>
+    <strong>World Metrology Day</strong> – Science of measurement and standards.</p>
+
+    <h2>May 21</h2>
+    <p><strong>World Day for Cultural Diversity for Dialogue and Development</strong>.</p>
+
+    <h2>May 22</h2>
+    <p><strong>International Day for Biological Diversity</strong> – Focus on protecting biodiversity.</p>
+
+    <h2>May 23</h2>
+    <p><strong>World Turtle Day</strong> – Conservation of turtles and tortoises.</p>
+
+    <h2>May 25</h2>
+    <p><strong>Africa Day</strong> – Commemorates the founding of the Organisation of African Unity.</p>
+
+    <h2>May 28</h2>
+    <p><strong>World Menstrual Hygiene Day</strong> – Advocates for menstrual health and dignity.</p>
+
+    <h2>May 29</h2>
+    <p><strong>International Day of U.N. Peacekeepers</strong> – Honors peacekeeping personnel.</p>
+
+    <h2>May 31</h2>
+    <p><strong>World No Tobacco Day</strong> – WHO campaign against tobacco use.</p>
+    </body>
+    </html>
+    """),
+    "06_June.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - June</title>
+    </head>
+    <body>
+    <h1>June – International & Fun Observances</h1>
+
+    <h2>June 1</h2>
+    <p><strong>Global Day of Parents</strong> – Recognizes parents’ role in raising children.<br>
+    <strong>International Children’s Day</strong> – Celebrated in many countries on June 1.</p>
+
+    <h2>June 3</h2>
+    <p><strong>World Bicycle Day</strong> – Promotes cycling for health and sustainability.</p>
+
+    <h2>June 5</h2>
+    <p><strong>World Environment Day</strong> – Major U.N. day for environmental action.</p>
+
+    <h2>June 7</h2>
+    <p><strong>World Food Safety Day</strong> – Focuses on safe food practices and regulation.</p>
+
+    <h2>June 8</h2>
+    <p><strong>World Oceans Day</strong> – Highlights ocean conservation and marine life.</p>
+
+    <h2>June 12</h2>
+    <p><strong>World Day Against Child Labour</strong> – Calls for ending child exploitation.</p>
+
+    <h2>June 14</h2>
+    <p><strong>World Blood Donor Day</strong> – Thanks blood donors and encourages donation.</p>
+
+    <h2>June 15</h2>
+    <p><strong>World Elder Abuse Awareness Day</strong> – Opposes abuse and neglect of older persons.</p>
+
+    <h2>June 16</h2>
+    <p><strong>Day of the African Child</strong> – Honors African children and their rights.</p>
+
+    <h2>June 17</h2>
+    <p><strong>World Day to Combat Desertification and Drought</strong> – Land restoration and resilience focus.</p>
+
+    <h2>June 18</h2>
+    <p><strong>Sustainable Gastronomy Day</strong> – Links food culture with sustainability.</p>
+
+    <h2>June 19</h2>
+    <p><strong>International Day for the Elimination of Sexual Violence in Conflict</strong>.<br>
+    <strong>Juneteenth</strong> (U.S., with global resonance) – Marks emancipation of enslaved African Americans.</p>
+
+    <h2>June 20</h2>
+    <p><strong>World Refugee Day</strong> – Honors refugees and raises awareness of their plight.</p>
+
+    <h2>June 21</h2>
+    <p><strong>International Day of Yoga</strong> – Encourages yoga practice globally.<br>
+    <strong>World Music Day</strong> (Fête de la Musique) – Street music and performances worldwide.</p>
+
+    <h2>June 23</h2>
+    <p><strong>U.N. Public Service Day</strong> – Celebrates contributions of public servants.<br>
+    <strong>International Widows Day</strong> – Focuses on the rights and hardships of widows.</p>
+
+    <h2>June 26</h2>
+    <p><strong>International Day Against Drug Abuse and Illicit Trafficking</strong>.<br>
+    <strong>International Day in Support of Victims of Torture</strong>.</p>
+
+    <h2>June 29</h2>
+    <p><strong>International Day of the Tropics</strong> – Highlights issues affecting tropical regions.</p>
+
+    <h2>June 30</h2>
+    <p><strong>International Asteroid Day</strong> – Raises awareness about asteroids and planetary defense.</p>
+    </body>
+    </html>
+    """),
+    "07_July.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - July</title>
+    </head>
+    <body>
+    <h1>July – International & Fun Observances</h1>
+
+    <h2>July 1</h2>
+    <p><strong>International Joke Day</strong> – Lightens the mood with humor and jokes.</p>
+
+    <h2>July 2</h2>
+    <p><strong>World UFO Day</strong> – For enthusiasts of unidentified flying objects and space mysteries.</p>
+
+    <h2>July 6</h2>
+    <p><strong>World Zoonoses Day</strong> – Highlights diseases transmitted from animals to humans.</p>
+
+    <h2>July 7</h2>
+    <p><strong>World Chocolate Day</strong> – Celebrates chocolate in all its forms.</p>
+
+    <h2>July 11</h2>
+    <p><strong>World Population Day</strong> – Draws attention to population issues and development.</p>
+
+    <h2>July 12</h2>
+    <p><strong>Malala Day</strong> – Honors Malala Yousafzai and advocates for girls’ education.</p>
+
+    <h2>July 15</h2>
+    <p><strong>World Youth Skills Day</strong> – Focus on youth employment and skills training.</p>
+
+    <h2>July 18</h2>
+    <p><strong>Nelson Mandela International Day</strong> – Encourages 67 minutes of service in honor of Mandela’s legacy.</p>
+
+    <h2>July 20</h2>
+    <p><strong>International Moon Day</strong> – Marks the Apollo 11 moon landing and lunar exploration.</p>
+
+    <h2>July 28</h2>
+    <p><strong>World Hepatitis Day</strong> – Raises awareness of viral hepatitis.</p>
+
+    <h2>July 30</h2>
+    <p><strong>International Day of Friendship</strong> – Promotes friendship between peoples and cultures.</p>
+    </body>
+    </html>
+    """),
+    "08_August.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - August</title>
+    </head>
+    <body>
+    <h1>August – International & Fun Observances</h1>
+
+    <h2>August 1</h2>
+    <p><strong>World Wide Web Day</strong> – Celebrates the invention and impact of the web.</p>
+
+    <h2>August 8</h2>
+    <p><strong>International Cat Day</strong> – Honors cats and responsible cat care.</p>
+
+    <h2>August 9</h2>
+    <p><strong>International Day of the World’s Indigenous Peoples</strong> – Recognizes Indigenous cultures and rights.</p>
+
+    <h2>August 12</h2>
+    <p><strong>International Youth Day</strong> – Highlights challenges and contributions of young people.</p>
+
+    <h2>August 15</h2>
+    <p><strong>International Relaxation Day</strong> – Encourages rest and stress reduction.</p>
+
+    <h2>August 19</h2>
+    <p><strong>World Humanitarian Day</strong> – Honors humanitarian workers and those affected by crises.<br>
+    <strong>World Photography Day</strong> – Celebrates the art and science of photography.</p>
+
+    <h2>August 20</h2>
+    <p><strong>World Mosquito Day</strong> – Marks discoveries around malaria transmission and raises awareness.</p>
+
+    <h2>August 23</h2>
+    <p><strong>International Day for the Remembrance of the Slave Trade and Its Abolition</strong> – Reflects on the transatlantic slave trade and its end.</p>
+
+    <h2>August 26</h2>
+    <p><strong>International Dog Day</strong> – Celebrates dogs and promotes adoption.</p>
+
+    <h2>August 29</h2>
+    <p><strong>International Day against Nuclear Tests</strong> – Calls for an end to nuclear weapons testing.</p>
+
+    <h2>August 30</h2>
+    <p><strong>International Day of the Victims of Enforced Disappearances</strong> – Commemorates people who have disappeared through state action.</p>
+    </body>
+    </html>
+    """),
+    "09_September.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - September</title>
+    </head>
+    <body>
+    <h1>September – International & Fun Observances</h1>
+
+    <h2>September 5</h2>
+    <p><strong>International Day of Charity</strong> – Encourages charitable work and donations.</p>
+
+    <h2>September 8</h2>
+    <p><strong>International Literacy Day</strong> – Focus on literacy as a human right.</p>
+
+    <h2>September 10</h2>
+    <p><strong>World Suicide Prevention Day</strong> – Promotes awareness and suicide prevention efforts.</p>
+
+    <h2>September 15</h2>
+    <p><strong>International Day of Democracy</strong> – Highlights democratic principles and practices.</p>
+
+    <h2>September 16</h2>
+    <p><strong>International Day for the Preservation of the Ozone Layer</strong> – Celebrates efforts to protect the ozone layer.</p>
+
+    <h2>September 18</h2>
+    <p><strong>World Bamboo Day</strong> – Promotes bamboo as a sustainable resource.</p>
+
+    <h2>September 21</h2>
+    <p><strong>International Day of Peace</strong> – Calls for non-violence and ceasefire.</p>
+
+    <h2>September 22</h2>
+    <p><strong>World Rhino Day</strong> – Draws attention to rhino conservation.</p>
+
+    <h2>September 23</h2>
+    <p><strong>International Day of Sign Languages</strong> – Recognizes sign languages and Deaf culture.</p>
+
+    <h2>September 26</h2>
+    <p><strong>World Contraception Day</strong> – Promotes informed choices about contraception.</p>
+
+    <h2>September 27</h2>
+    <p><strong>World Tourism Day</strong> – Examines tourism’s impact on society and the planet.</p>
+
+    <h2>September 30</h2>
+    <p><strong>International Podcast Day</strong> – Celebrates podcast creators and listeners.<br>
+    <strong>International Translation Day</strong> – Honors translators and interpreters.</p>
+    </body>
+    </html>
+    """),
+    "10_October.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - October</title>
+    </head>
+    <body>
+    <h1>October – International & Fun Observances</h1>
+
+    <h2>October 1</h2>
+    <p><strong>International Day of Older Persons</strong> – Focus on older people’s rights and wellbeing.</p>
+
+    <h2>October 2</h2>
+    <p><strong>International Day of Non-Violence</strong> – On Mahatma Gandhi’s birthday.</p>
+
+    <h2>October 4</h2>
+    <p><strong>World Animal Day</strong> – Global initiative for animal rights and welfare.</p>
+
+    <h2>October 5</h2>
+    <p><strong>World Teachers’ Day</strong> – Recognizes teachers’ contributions worldwide.</p>
+
+    <h2>October 7</h2>
+    <p><strong>World Cotton Day</strong> – Explores cotton’s role in trade and development.</p>
+
+    <h2>October 10</h2>
+    <p><strong>World Mental Health Day</strong> – Raises awareness and fights stigma around mental health.</p>
+
+    <h2>October 11</h2>
+    <p><strong>International Day of the Girl Child</strong> – Focus on girls’ rights and empowerment.</p>
+
+    <h2>October 13</h2>
+    <p><strong>International Day for Disaster Risk Reduction</strong> – Highlights risk-reduction strategies.</p>
+
+    <h2>October 15</h2>
+    <p><strong>Global Handwashing Day</strong> – Promotes hand hygiene to prevent disease.<br>
+    <strong>International Day of Rural Women</strong> – Recognizes rural women’s role in agriculture and development.</p>
+
+    <h2>October 16</h2>
+    <p><strong>World Food Day</strong> – Addresses global hunger and food systems.</p>
+
+    <h2>October 17</h2>
+    <p><strong>International Day for the Eradication of Poverty</strong> – Focuses on ending extreme poverty.</p>
+
+    <h2>October 24</h2>
+    <p><strong>United Nations Day</strong> – Marks the U.N. Charter coming into force.<br>
+    <strong>World Development Information Day</strong> – Promotes dissemination of information on development.</p>
+
+    <h2>October 27</h2>
+    <p><strong>World Day for Audiovisual Heritage</strong> – Preserves audiovisual records and archives.</p>
+
+    <h2>October 31</h2>
+    <p><strong>World Cities Day</strong> – Focus on sustainable urban development.<br>
+    <strong>Halloween</strong> – Widely celebrated cultural festival with costumes and themed events.</p>
+    </body>
+    </html>
+    """),
+    "11_November.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - November</title>
+    </head>
+    <body>
+    <h1>November – International & Fun Observances</h1>
+
+    <h2>November 1</h2>
+    <p><strong>World Vegan Day</strong> – Promotes veganism, animal welfare, and sustainable living.</p>
+
+    <h2>November 2</h2>
+    <p><strong>International Day to End Impunity for Crimes against Journalists</strong> – Protects journalists and press freedom.</p>
+
+    <h2>November 6</h2>
+    <p><strong>International Day for Preventing the Exploitation of the Environment in War and Armed Conflict</strong>.</p>
+
+    <h2>November 8</h2>
+    <p><strong>World Urbanism Day</strong> – Focus on urban planning and city design.</p>
+
+    <h2>November 10</h2>
+    <p><strong>World Science Day for Peace and Development</strong> – Emphasizes science’s role in society.</p>
+
+    <h2>November 11</h2>
+    <p><strong>Singles Day</strong> (11/11, China, now global shopping event).<br>
+    <strong>Remembrance Day / Veterans Day</strong> – Honors military service and war dead in many countries.</p>
+
+    <h2>November 13</h2>
+    <p><strong>World Kindness Day</strong> – Encourages acts of kindness and compassion.</p>
+
+    <h2>November 14</h2>
+    <p><strong>World Diabetes Day</strong> – Raises awareness about diabetes prevention and management.</p>
+
+    <h2>November 16</h2>
+    <p><strong>International Day for Tolerance</strong> – Promotes respect and understanding among cultures.</p>
+
+    <h2>November 17</h2>
+    <p><strong>World Prematurity Day</strong> – Focus on preterm birth and neonatal care.</p>
+
+    <h2>November 19</h2>
+    <p><strong>International Men’s Day</strong> – Discusses men’s health and positive male role models.<br>
+    <strong>World Toilet Day</strong> – Highlights sanitation and access to toilets.</p>
+
+    <h2>November 20</h2>
+    <p><strong>Universal Children’s Day</strong> – Promotes children’s rights and welfare.<br>
+    <strong>Africa Industrialization Day</strong> – Focus on industrial development in Africa.</p>
+
+    <h2>November 21</h2>
+    <p><strong>World Television Day</strong> – Recognizes TV’s role in communication and education.</p>
+
+    <h2>November 25</h2>
+    <p><strong>International Day for the Elimination of Violence against Women</strong> – Calls for ending gender-based violence.</p>
+
+    <h2>November 29</h2>
+    <p><strong>International Day of Solidarity with the Palestinian People</strong> – U.N. observance on Palestinian rights.</p>
+    </body>
+    </html>
+    """),
+    "12_December.html": dedent("""\
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>International Observances - December</title>
+    </head>
+    <body>
+    <h1>December – International & Fun Observances</h1>
+
+    <h2>December 1</h2>
+    <p><strong>World AIDS Day</strong> – Global campaign on HIV/AIDS awareness and prevention.</p>
+
+    <h2>December 2</h2>
+    <p><strong>International Day for the Abolition of Slavery</strong> – Focus on modern slavery and human trafficking.</p>
+
+    <h2>December 3</h2>
+    <p><strong>International Day of Persons with Disabilities</strong> – Promotes inclusion and accessibility.</p>
+
+    <h2>December 4</h2>
+    <p><strong>World Wildlife Conservation Day</strong> – Encourages wildlife protection and conservation.</p>
+
+    <h2>December 5</h2>
+    <p><strong>International Volunteer Day</strong> – Honors volunteers and volunteer organizations.<br>
+    <strong>World Soil Day</strong> – Highlights soil health and sustainable land management.</p>
+
+    <h2>December 7</h2>
+    <p><strong>International Civil Aviation Day</strong> – Promotes understanding of aviation’s role in development.</p>
+
+    <h2>December 9</h2>
+    <p><strong>International Anti-Corruption Day</strong> – Raises awareness about corruption and anti-corruption efforts.</p>
+
+    <h2>December 10</h2>
+    <p><strong>Human Rights Day</strong> – Marks the adoption of the Universal Declaration of Human Rights.</p>
+
+    <h2>December 11</h2>
+    <p><strong>International Mountain Day</strong> – Draws attention to mountain communities and ecosystems.</p>
+
+    <h2>December 12</h2>
+    <p><strong>International Universal Health Coverage Day</strong> – Advocates for access to quality health care for all.</p>
+
+    <h2>December 18</h2>
+    <p><strong>International Migrants Day</strong> – Recognizes the contributions and rights of migrants worldwide.</p>
+
+    <h2>December 20</h2>
+    <p><strong>International Human Solidarity Day</strong> – Promotes solidarity as a fundamental value in international relations.</p>
+
+    <h2>December 31</h2>
+    <p><strong>New Year’s Eve</strong> – Global cultural celebration marking the end of the year.</p>
+    </body>
+    </html>
+    """)
+}
+
+# Create individual month files
+for filename, html in months.items():
+    with open(f"{base_path}/{filename}", "w", encoding="utf-8") as f:
+        f.write(html)
+
+# Create a full-year combined HTML
+full_year_filename = f"{base_path}/00_Full_Year_International_Observances.html"
+with open(full_year_filename, "w", encoding="utf-8") as f:
+    f.write("<!DOCTYPE html>\n<html>\n<head>\n<meta charset='UTF-8'>\n"
+            "<title>International Observances - Full Year</title>\n</head>\n<body>\n")
+    f.write("<h1>International & Fun Observances – Full Year Almanac</h1>\n")
+    for filename in sorted(months.keys()):
+        month_name = filename.split("_", 1)[1].replace(".html", "")
+        f.write(f"<hr><h1>{month_name}</h1>\n")
+        with open(f"{base_path}/{filename}", "r", encoding="utf-8") as mf:
+            content = mf.read()
+            body_start = content.find("<body>")
+            body_end = content.find("</body>")
+            if body_start != -1 and body_end != -1:
+                inner = content[body_start + len("<body>"):body_end]
+                lines = inner.splitlines()[1:]  # drop the month-level H1
+                f.write("\n".join(lines))
+            else:
+                f.write(content)
+    f.write("\n</body>\n</html>")
+
+# Zip all files
+zip_path = f"{base_path}/international_observances_html_bundle.zip"
+with ZipFile(zip_path, "w") as z:
+    for filename in months.keys():
+        z.write(f"{base_path}/{filename}", arcname=filename)
+    z.write(full_year_filename, arcname="00_Full_Year_International_Observances.html")
+
+zip_path
